@@ -1,20 +1,39 @@
 package application;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 import model.Client;
+import service.ClientService;
 
 public class Main {
 	public static void main(String[] args) {
-		Client clienteTeste = new Client(null, "Ciro", "New York", "98918374625", "cro@mail");
-		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistema-cliente");
-		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(clienteTeste);
-		em.getTransaction().commit();
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Insira os seguintes dados:");
+		System.out.print("Nome: ");
+		String name = sc.nextLine();
+
+		System.out.println("Bairro: ");
+		String address = sc.nextLine();
+
+		System.out.println("Celular: ");
+		String phoneNumber = sc.nextLine();
+
+		System.out.println("Email: ");
+		String email = sc.nextLine();
+
+		System.out.println("Formatando dados...");
+
+		Client client = new Client(null, name, address, phoneNumber, email);
+		ClientService rc = new ClientService();
+
+		try {
+			rc.register(client);
+		} catch (Exception e) {
+			System.out.println("Error " + e.getMessage());
+		}
+
+		System.out.println("Cliente " + client.getName() + " inserido no sistema com sucesso!");
 	}
 }
