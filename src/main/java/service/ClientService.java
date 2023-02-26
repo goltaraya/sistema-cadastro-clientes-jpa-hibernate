@@ -21,14 +21,20 @@ public class ClientService implements ClientServiceInterface {
 
 	@Override
 	public Client getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Client client = this.em.find(Client.class, id);
+		if (client == null) {
+			return null;
+		}
+		return client;
 	}
 
 	@Override
 	public List<Client> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		this.em.getTransaction().begin();
+		String qlString = "SELECT c FROM Client c";
+		List<Client> clientsList = this.em.createQuery(qlString).getResultList();
+		this.em.getTransaction().commit();
+		return clientsList;
 	}
 
 	@Override

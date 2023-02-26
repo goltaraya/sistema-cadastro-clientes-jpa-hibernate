@@ -1,39 +1,38 @@
 package application;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import model.Client;
-import service.ClientService;
+import service.MenuService;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		MenuService menu = new MenuService();
 
-		System.out.println("Insira os seguintes dados:");
-		System.out.print("Nome: ");
-		String name = sc.nextLine();
+		boolean exitLoop = false;
+		int option = 0;
+		while (exitLoop != true) {
+			menu.showMenu();
+			option = sc.nextInt();
+			switch (option) {
+			case 1:
+				menu.registerClient();
+				break;
 
-		System.out.println("Bairro: ");
-		String address = sc.nextLine();
+			case 2:
+				menu.getClientById();
+				break;
+				
+			case 3:
+				menu.getAllClients();
+				break;
+			case 9:
+				exitLoop = true;
+				break;
+			}
 
-		System.out.println("Celular: ");
-		String phoneNumber = sc.nextLine();
-
-		System.out.println("Email: ");
-		String email = sc.nextLine();
-
-		System.out.println("Formatando dados...");
-
-		Client client = new Client(null, name, address, phoneNumber, email);
-		ClientService rc = new ClientService();
-
-		try {
-			rc.register(client);
-		} catch (Exception e) {
-			System.out.println("Error " + e.getMessage());
 		}
 
-		System.out.println("Cliente " + client.getName() + " inserido no sistema com sucesso!");
+		sc.close();
 	}
 }
