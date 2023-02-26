@@ -69,13 +69,15 @@ public class MenuService implements MenuServiceInterface {
 		} else {
 			System.out.println("Ainda não existe clientes cadastrados no sistema...");
 		}
-
 	}
 
 	@Override
 	public void removeClient() {
-		// TODO Auto-generated method stub
-
+		System.out.print("Insira o ID do cliente que você deseja remover: ");
+		int id = sc.nextInt();
+		Client client = cs.getById(id);
+		cs.remove(client);
+		System.out.println("Cliente " + client.getName() + " excluído com sucesso!");
 	}
 
 }

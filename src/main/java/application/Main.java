@@ -22,9 +22,13 @@ public class Main {
 			case 2:
 				menu.getClientById();
 				break;
-				
+
 			case 3:
 				menu.getAllClients();
+				break;
+
+			case 4:
+				menu.removeClient();
 				break;
 			case 9:
 				exitLoop = true;

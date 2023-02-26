@@ -32,6 +32,7 @@ public class ClientService implements ClientServiceInterface {
 	public List<Client> getAll() {
 		this.em.getTransaction().begin();
 		String qlString = "SELECT c FROM Client c";
+		@SuppressWarnings("unchecked")
 		List<Client> clientsList = this.em.createQuery(qlString).getResultList();
 		this.em.getTransaction().commit();
 		return clientsList;
@@ -39,8 +40,9 @@ public class ClientService implements ClientServiceInterface {
 
 	@Override
 	public void remove(Client client) {
-		// TODO Auto-generated method stub
-
+		this.em.getTransaction().begin();
+		this.em.remove(client);
+		this.em.getTransaction().commit();
 	}
 
 }
