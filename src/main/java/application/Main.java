@@ -31,12 +31,13 @@ public class Main {
 				menu.removeClient();
 				break;
 			case 9:
+				menu.exit();
 				exitLoop = true;
 				break;
 			}
 
 		}
-
+		
 		sc.close();
 	}
 }

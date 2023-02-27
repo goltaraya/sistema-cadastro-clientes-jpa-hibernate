@@ -7,5 +7,5 @@ public interface MenuServiceInterface {
 	public void getClientById();
 	public void getAllClients();
 	public void removeClient();
-	
+	public void exit();
 }

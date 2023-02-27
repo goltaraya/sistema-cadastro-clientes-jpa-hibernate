@@ -16,6 +16,7 @@ public class MenuService implements MenuServiceInterface {
 		System.out.println("2 - Buscar cliente");
 		System.out.println("3 - Mostrar todos os clientes");
 		System.out.println("4 - Remover cliente");
+		System.out.println("9 - Sair");
 	}
 
 	@Override
@@ -73,11 +74,22 @@ public class MenuService implements MenuServiceInterface {
 
 	@Override
 	public void removeClient() {
+		List<Client> clients = cs.getAll();
+		if (clients.size() <= 0) {
+			System.out.println("Ainda não existe clientes cadastrados no sistema...");
+		} else {
+			
 		System.out.print("Insira o ID do cliente que você deseja remover: ");
 		int id = sc.nextInt();
 		Client client = cs.getById(id);
 		cs.remove(client);
 		System.out.println("Cliente " + client.getName() + " excluído com sucesso!");
+	}
+	}
+
+	@Override
+	public void exit() {
+		System.out.println("Obrigado por usar nossos sistemas. Volte sempre!");
 	}
 
 }
